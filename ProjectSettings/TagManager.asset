@@ -6,14 +6,15 @@ TagManager:
   tags:
   - disableMove
   - Jump1
+  - onlyhitplayer
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Playuer
   - Water
   - UI
-  - 
+  - OnlyHitPlayer
   - 
   - 
   - 
