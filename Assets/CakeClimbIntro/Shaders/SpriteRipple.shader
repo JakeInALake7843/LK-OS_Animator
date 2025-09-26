@@ -5,6 +5,7 @@ Shader "Unlit/SpriteRipple"
         _MainTex ("Texture", 2D) = "white" {}
         _HitTime ("Hit Time", Range(0, 1)) = 0
         _Color ("Color", Color) = (1,1,1,1)
+        _Pixels ("Pixels Per Unit", Range(0, 36)) = 5
     }
     SubShader
     {
@@ -40,6 +41,7 @@ Shader "Unlit/SpriteRipple"
 
             uniform float _HitTime;
             uniform float4 _Color;
+            uniform float _Pixels;
 
             v2f vert (appdata v)
             {
@@ -61,6 +63,9 @@ Shader "Unlit/SpriteRipple"
                 float4 outputColor = _Color;
                 float2 ScaledUV = i.uv.xy * float2(22, 1.6);
                 float2 Position = ScaledUV - float2(11, 1.6);
+                if (_Pixels > 0.05) {
+                    Position = floor(Position * _Pixels)/_Pixels;
+                }
                 float dist = lineDist(Position);
                 float Distance = step(dist, _HitTime * 10.62);
                 outputColor.a = Distance;
